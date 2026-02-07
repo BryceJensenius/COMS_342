@@ -14,15 +14,12 @@ public class Evaluator implements Visitor<Value> {
 
     @Override
     public Value visit(AddExp e) {
-        // semantics for add expression -- the result is the result of
-        // summing each of the operands
-        double result = 0;
+        // semantics for add expression
         List<Exp> operands = e.all();
-        for (Exp operand : operands) {
-            NumVal val = (NumVal) operand.accept(this);
-            result += val.v();
-        }
-        return new NumVal(result);
+        NumVal val1 =(NumVal) operands.get(0).accept(this);
+        NumVal val2 = (NumVal) operands.get(1).accept(this);
+
+        return new NumVal(val1.v().add(val2.v()));
     }
 
     @Override
@@ -31,50 +28,17 @@ public class Evaluator implements Visitor<Value> {
     }
 
     @Override
-    public Value visit(DivExp e) {
-        // semantics for div expression -- the result is the result of
-        // dividing each of the operands, in sequence, from left to
-        // right
-        List<Exp> operands = e.all();
-        NumVal lVal = (NumVal) operands.getFirst().accept(this);
-        double result = lVal.v();
-        for (int i = 1; i < operands.size(); i++) {
-            NumVal rVal = (NumVal) operands.get(i).accept(this);
-            result = result / rVal.v();
-        }
-        return new NumVal(result);
-    }
-
-    @Override
     public Value visit(MultExp e) {
-        // semantics for mult expression -- the result is the result of
-        // multiplying each of the operands
-        double result = 1;
+        // semantics for Multiply expression
         List<Exp> operands = e.all();
-        for (Exp operand : operands) {
-            NumVal val = (NumVal) operand.accept(this);
-            result *= val.v();
-        }
-        return new NumVal(result);
+        NumVal val1 =(NumVal) operands.get(0).accept(this);
+        NumVal val2 = (NumVal) operands.get(1).accept(this);
+
+        return new NumVal(val1.v().mul(val2.v()));
     }
 
     @Override
     public Value visit(Program p) {
         return (Value) p.e().accept(this);
-    }
-
-    @Override
-    public Value visit(SubExp e) {
-        // semantics for sub expression -- the result is the result of
-        // subtracting each of the operands, in sequence, from left to
-        // right
-        List<Exp> operands = e.all();
-        NumVal lVal = (NumVal) operands.getFirst().accept(this);
-        double result = lVal.v();
-        for (int i = 1; i < operands.size(); i++) {
-            NumVal rVal = (NumVal) operands.get(i).accept(this);
-            result = result - rVal.v();
-        }
-        return new NumVal(result);
     }
 }

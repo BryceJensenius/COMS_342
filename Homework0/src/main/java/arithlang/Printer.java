@@ -24,22 +24,8 @@ public class Printer {
             return result + ")";
         }
 
-        public String visit(SubExp e) {
-            StringBuilder result = new StringBuilder("(-");
-            for (AST.Exp exp : e.all())
-                result.append(" ").append(exp.accept(this));
-            return result + ")";
-        }
-
         public String visit(MultExp e) {
             StringBuilder result = new StringBuilder("(*");
-            for (AST.Exp exp : e.all())
-                result.append(" ").append(exp.accept(this));
-            return result + ")";
-        }
-
-        public String visit(DivExp e) {
-            StringBuilder result = new StringBuilder("(/");
             for (AST.Exp exp : e.all())
                 result.append(" ").append(exp.accept(this));
             return result + ")";

@@ -9,34 +9,23 @@ grammar ArithLang;
  exp returns [Exp ast]: 
 		  n=numexp  { $ast = $n.ast; }
         | a=addexp  { $ast = $a.ast; }
-        | s=subexp  { $ast = $s.ast; }
         | m=multexp { $ast = $m.ast; }
-        | d=divexp  { $ast = $d.ast; }
         ;
   
- numexp returns [NumExp ast]:
- 		      n0=Number { $ast = new NumExp( Integer.parseInt($n0.text)); }
-  		| '-' n0=Number { $ast = new NumExp(-Integer.parseInt($n0.text)); }
-  		|     n0=Number Dot n1=Number { $ast = new NumExp(Double.parseDouble(      $n0.text+"."+$n1.text)); }
-  		| '-' n0=Number Dot n1=Number { $ast = new NumExp(Double.parseDouble("-" + $n0.text+"."+$n1.text)); }
-  		;		
-  
+ numexp returns [NumExp ast]
+    : P { $ast = new NumExp("p"); }
+    | N { $ast = new NumExp("n"); }
+    | Z { $ast = new NumExp("z"); }
+    | U { $ast = new NumExp("u"); }
+    ;
+
  addexp returns [AddExp ast]
         locals [ArrayList<Exp> list]
  		@init { $list = new ArrayList<Exp>(); } :
  		'(' '+'
  		      e=exp { $list.add($e.ast); }
- 		    ( e=exp { $list.add($e.ast); } )+
- 		')' { $ast = new AddExp($list); }
- 		;
-
- subexp returns [SubExp ast]
-        locals [ArrayList<Exp> list]
- 		@init { $list = new ArrayList<Exp>(); } :
- 		'(' '-'
  		      e=exp { $list.add($e.ast); }
- 		    ( e=exp { $list.add($e.ast); } )+
- 		')' { $ast = new SubExp($list); }
+ 		')' { $ast = new AddExp($list); }
  		;
 
  multexp returns [MultExp ast] 
@@ -44,24 +33,19 @@ grammar ArithLang;
  		@init { $list = new ArrayList<Exp>(); } :
  		'(' '*'
  		      e=exp { $list.add($e.ast); }
- 		    ( e=exp { $list.add($e.ast); } )+ 
- 		')' { $ast = new MultExp($list); }
- 		;
-
- divexp returns [DivExp ast]
-        locals [ArrayList<Exp> list]
- 		@init { $list = new ArrayList<Exp>(); } :
- 		'(' '/'
  		      e=exp { $list.add($e.ast); }
- 		    ( e=exp { $list.add($e.ast); } )+
- 		')' { $ast = new DivExp($list); }
+ 		')' { $ast = new MultExp($list); }
  		;
 
  // Lexical Specification of this Programming Language
  //  - lexical specification rules start with uppercase
  Dot : '.' ;
 
- Number : DIGIT+ ;
+ // Define tokens for the abstarct values
+ P : 'p';
+ N : 'n';
+ Z : 'z';
+ U : 'u';
 
  Identifier :   Letter LetterOrDigit*;
 

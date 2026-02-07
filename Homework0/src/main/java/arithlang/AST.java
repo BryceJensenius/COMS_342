@@ -17,11 +17,7 @@ public interface AST {
 
         T visit(AST.AddExp e);
 
-        T visit(AST.SubExp e);
-
         T visit(AST.MultExp e);
-
-        T visit(AST.DivExp e);
 
         T visit(AST.Program p);
     }
@@ -51,13 +47,13 @@ public interface AST {
     }
 
     class NumExp extends Exp {
-        final double _val;
+        final Value.AbsVal _val;
 
-        public NumExp(double v) {
-            _val = v;
+        public NumExp(String s) {
+            _val = Value.AbsVal.fromString(s);
         }
 
-        public double v() {
+        public Value.AbsVal v() {
             return _val;
         }
 
@@ -81,26 +77,6 @@ public interface AST {
 
     class AddExp extends CompoundArithExp {
         public AddExp(List<Exp> args) {
-            super(args);
-        }
-
-        public Object accept(Visitor visitor) {
-            return visitor.visit(this);
-        }
-    }
-
-    class SubExp extends CompoundArithExp {
-        public SubExp(List<Exp> args) {
-            super(args);
-        }
-
-        public Object accept(Visitor visitor) {
-            return visitor.visit(this);
-        }
-    }
-
-    class DivExp extends CompoundArithExp {
-        public DivExp(List<Exp> args) {
             super(args);
         }
 
