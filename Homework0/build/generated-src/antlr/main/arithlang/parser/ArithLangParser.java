@@ -18,8 +18,7 @@ public class ArithLangParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, Dot=5, P=6, N=7, Z=8, U=9, Identifier=10, 
-		Letter=11, LetterOrDigit=12, Number=13, AT=14, ELLIPSIS=15, WS=16, Comment=17, 
-		Line_Comment=18;
+		Letter=11, LetterOrDigit=12, AT=13, ELLIPSIS=14, WS=15, Comment=16, Line_Comment=17;
 	public static final int
 		RULE_program = 0, RULE_exp = 1, RULE_numexp = 2, RULE_addexp = 3, RULE_multexp = 4;
 	private static String[] makeRuleNames() {
@@ -32,15 +31,14 @@ public class ArithLangParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'('", "'+'", "')'", "'*'", "'.'", "'p'", "'n'", "'z'", "'u'", 
-			null, null, null, null, "'@'", "'...'"
+			null, null, null, "'@'", "'...'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, "Dot", "P", "N", "Z", "U", "Identifier", 
-			"Letter", "LetterOrDigit", "Number", "AT", "ELLIPSIS", "WS", "Comment", 
-			"Line_Comment"
+			"Letter", "LetterOrDigit", "AT", "ELLIPSIS", "WS", "Comment", "Line_Comment"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -362,7 +360,7 @@ public class ArithLangParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u00125\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u00115\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0001"+
 		"\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
 		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0003"+

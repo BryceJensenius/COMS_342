@@ -1,3 +1,3 @@
-.gradle/
-build/
+Homework0/.gradle/*
+Homework0/build/*
 out/
