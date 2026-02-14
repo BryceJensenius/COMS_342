@@ -14,6 +14,12 @@ public interface Env {
         }
     }
 
+    class RedefinitionException extends RuntimeException {
+        RedefinitionException(String var_name){
+            super("Re-declaration of variable " + var_name + " detected. Discarding redefinition.");
+        }
+    }
+
     class EmptyEnv implements Env {
         public Value get(String search_var) {
             throw new LookupException("No binding found for name: " + search_var);
@@ -53,6 +59,7 @@ public interface Env {
         }
 
         public synchronized void extend(String var, Value val) {
+            if(map.containsKey(var)) throw new RedefinitionException(var);
             map.put(var, val);
         }
     }

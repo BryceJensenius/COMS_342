@@ -31,7 +31,7 @@ public class Interpreter {
                         Value val = eval.valueOf(p);
                         printer.print(val);
                     }
-                } catch (Env.LookupException e) {
+                } catch (Env.LookupException | Env.RedefinitionException e) {
                     printer.print(e);
                 } catch (Exception e) {
                     System.err.println("Error:" + e.getMessage());
